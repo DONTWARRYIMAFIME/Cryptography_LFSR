@@ -1,7 +1,5 @@
 package by.bsuir.cryptography.LFSR;
 
-import java.nio.charset.StandardCharsets;
-
 public class Main {
     public static void main(String[] args) {
 
@@ -14,10 +12,12 @@ public class Main {
 //        int[] discharges = new int[] {4, 1};
         LFSR lfsr = new LFSR(registerLength, discharges);
 
-        String message = "HELLO WORLD";
+        byte[] message = Utils.readFile("input.txt");
 
-        byte[] encrypted = lfsr.encrypt(message.getBytes(StandardCharsets.UTF_8));
+        byte[] encrypted = lfsr.encrypt(message);
+        Utils.writeFile(encrypted, "encrypted.txt");
         byte[] decrypted = lfsr.decrypt(encrypted);
+        Utils.writeFile(decrypted, "decrypted.txt");
 
         System.out.println("Encrypted bytes : " + encrypted);
         System.out.println("Decrypted bytes : " + decrypted);
